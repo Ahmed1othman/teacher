@@ -31,28 +31,5 @@ class UserSeeder extends Seeder
         $users->password = Hash::make('12345678');
         $users->save();
 
-
-       $users = new User();
-       $users->first_name = "test";
-       $users->last_name = "test";
-       $users->phone = "0123123123";
-       $users->email = "test@test.com";
-       $users->country_id = 1;
-       $users->city_id = 1;
-       $users->type = "customer";
-       $users->password = Hash::make('12345678');
-       $users->save();
-
-
-       $users = new User();
-       $users->first_name = "dealer";
-       $users->last_name = "dealer";
-       $users->phone = "0123456123";
-       $users->email = "dealer@dealer.com";
-       $users->country_id = 1;
-       $users->city_id = 1;
-       $users->type = "dealer";
-       $users->password = Hash::make('12345678');
-       $users->save();
     }
 }

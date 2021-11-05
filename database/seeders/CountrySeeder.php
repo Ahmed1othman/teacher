@@ -17,11 +17,10 @@ class CountrySeeder extends Seeder
     public function run()
     {
         DB::table('countries')->delete();
-        Country::create(['name' => 'Egypt']);
-        Country::create(['name' => 'UEA']);
+        Country::create(['name_en' => 'Egypt','name_ar'=>'مصر']);
 
         DB::table('cities')->delete();
-        City::create(['name' => 'Cairo','country_id'=>1]);
-        City::create(['name' => 'Alexandria','country_id'=>1]);
+        City::create(['name' => 'Cairo','name'=>'القاهرة','country_id'=>1]);
+        City::create(['name' => 'Alexandria','name'=>'الاسكندرية','country_id'=>1]);
     }
 }
