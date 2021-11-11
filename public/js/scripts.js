@@ -86,16 +86,6 @@ function loadStyle(href, callback) {
       <label class="custom-control-label" for="flatRadio">Flat</label>
     </div>
   </div>
-  <div class="p-4">
-    <p class="text-muted mb-2">Direction</p>
-    <div class="custom-control custom-radio custom-control-inline">
-    <input type="radio" id="ltrRadio" name="directionRadio" class="custom-control-input direction-radio" data-direction="ltr">
-    <label class="custom-control-label" for="ltrRadio">Ltr</label>
-  </div>
-  <div class="custom-control custom-radio custom-control-inline">
-    <input type="radio" id="rtlRadio" name="directionRadio" class="custom-control-input direction-radio" data-direction="rtl">
-    <label class="custom-control-label" for="rtlRadio">Rtl</label>
-  </div>
 </div>
 <a href="#" class="theme-button"> <i class="simple-icon-magic-wand"></i> </a>
 </div>
@@ -119,7 +109,7 @@ function loadStyle(href, callback) {
         if (localStorage.getItem("dore-direction")) {
             direction = localStorage.getItem("dore-direction");
         } else {
-            localStorage.setItem("dore-direction", direction);
+            // localStorage.setItem("dore-direction", direction);
         }
         if (localStorage.getItem("dore-radius")) {
             radius = localStorage.getItem("dore-radius");
@@ -133,7 +123,7 @@ function loadStyle(href, callback) {
     }
 
     $(".theme-color[data-theme='" + theme + "']").addClass("active");
-    $(".direction-radio[data-direction='" + direction + "']").attr("checked", true);
+    // $(".direction-radio[data-direction='" + direction + "']").attr("checked", true);
     $(".radius-radio[data-radius='" + radius + "']").attr("checked", true);
     $("#switchDark").attr("checked", theme.indexOf("dark") > 0 ? true : false);
 
@@ -162,8 +152,8 @@ function loadStyle(href, callback) {
     $("input[name='directionRadio']").on("change", function(event) {
         var direction = $(event.currentTarget).data("direction");
         try {
-            localStorage.setItem("dore-direction", direction);
-            window.location.reload();
+            // localStorage.setItem("dore-direction", direction);
+            // window.location.reload();
         } catch (error) {}
     });
 

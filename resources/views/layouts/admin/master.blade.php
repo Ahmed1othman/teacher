@@ -9,7 +9,7 @@
         <title>@yield('title')</title>
         @include('layouts.admin.header')
     </head>
-    <body id="app-container" class="menu-default show-spinner">
+    <body id="app-container" class="menu-default show-spinner {{ app()->getLocale()=='ar' ? 'rtl':'ltr' }} ">
         @include('layouts.admin.navbar')
         @include('layouts.admin.sidebar')
         <main>

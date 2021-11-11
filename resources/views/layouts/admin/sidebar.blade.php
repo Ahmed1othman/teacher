@@ -12,15 +12,27 @@
                     <a href="#users">
                          <i class="simple-icon-user-following"></i> <span class="d-inline-block">{{ __('admin/app.users') }}</span>
                     </a>
-
                 </li>
-               
+                <li>
+                    <a href="{{ route('articles.index') }}">
+                         <i class="iconsminds-newspaper"></i> <span class="d-inline-block">{{ __('admin/app.article') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('news.index') }}">
+                         <i class="iconsminds-newspaper"></i> <span class="d-inline-block">{{ __('admin/app.news') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('events.index') }}">
+                         <i class="simple-icon-game-controller"></i> <span class="d-inline-block">{{ __('admin/app.events') }}</span>
+                    </a>
+                </li>
                 <li>
                     <a href="#generalSetting">
                         <i class="iconsminds-air-balloon-1"></i> {{ __('admin/app.generalSetting') }}
                     </a>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -67,34 +79,14 @@
                         <i class="simple-icon-picture"></i> <span class="d-inline-block">{{ __('admin/app.sliders') }}</span>
                     </a>
                 </li>
-            </ul>
-            <ul class="list-unstyled" data-link="projects">
                 <li>
-                    <a href="{{ route('projects.index') }}">
-                        <i class="iconsminds-project"></i> <span class="d-inline-block">{{ __('admin/app.projects') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('projects.request') }}">
-                        <i class="iconsminds-project"></i> <span class="d-inline-block">{{ __('admin/app.projectss_request') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('projects.implementation') }}">
-                        <i class="iconsminds-project"></i> <span class="d-inline-block">{{ __('admin/app.projects_implementation') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('projects.delivery') }}">
-                        <i class="iconsminds-project"></i> <span class="d-inline-block">{{ __('admin/app.projects_delivery') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('projects.history') }}">
-                        <i class="iconsminds-project"></i> <span class="d-inline-block">{{ __('admin/app.projects_history') }}</span>
+                    <a href="{{ route('type.index') }}">
+                        <i class="simple-icon-picture"></i> <span
+                            class="d-inline-block">{{ __('admin/app.type') }}</span>
                     </a>
                 </li>
             </ul>
+
         </div>
     </div>
 </div>

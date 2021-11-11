@@ -47,6 +47,35 @@
 
 
             <div class="position-relative d-inline-block">
+                <button class="header-icon btn btn-empty" type="button" id="languageButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="simple-icon-flag"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right mt-3 position-absolute" id="languageDropdown">
+                    <div class="scroll" style="padding:10px">
+
+
+                        <div class="d-flex flex-row mb-3  ">
+                            <div class="pl-3">
+                                <a rel="alternate" href="{{ route('select','ar') }}">
+                                    <p class="font-weight-medium mb-1 "> {{ __('admin/app.arabic') }}</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row mb-3  ">
+                            <div class="pl-3">
+                                <a rel="alternate" href="{{ route('select','en') }}">
+                                    <p class="font-weight-medium mb-1 "> {{ __('admin/app.english') }}</p>
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="position-relative d-inline-block">
                 <button class="header-icon btn btn-empty" type="button" id="notificationButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="simple-icon-bell"></i>
@@ -70,6 +99,7 @@
                         @endforeach
                     </div>
                 </div>
+
             </div>
 
             <button class="header-icon btn btn-empty d-none d-sm-inline-block" type="button" id="fullScreenButton">
