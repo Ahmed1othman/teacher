@@ -14,6 +14,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('lang/{lang}', [HomeController::class,'select'])->name('select');
 
 require __DIR__.'/auth.php';
 

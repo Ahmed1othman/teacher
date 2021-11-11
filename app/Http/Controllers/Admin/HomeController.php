@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -14,10 +17,21 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         return view('admin.index');
     }
 
+    public function select($lang)
+    {
 
+        if (!in_array($lang, ['en', 'ar'])) {
+            abort(400);
+        }
+        Session::put('lang', $lang);
+        App::setLocale($lang);
+        // dd(app()->getLocale());
+        return back();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +50,7 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-      
+
     }
 
     /**

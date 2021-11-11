@@ -27,9 +27,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 require __DIR__ . '/auth.php';
 
-Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
-
-
+Route::group(['middleware'=>['auth','language']],function (){
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::post('partners-active', [PartnerController::class,'changeStatus']);
