@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Website\HomeController;
+use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
