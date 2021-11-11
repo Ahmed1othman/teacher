@@ -13,21 +13,7 @@
                          <i class="simple-icon-user-following"></i> <span class="d-inline-block">{{ __('admin/app.users') }}</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('articles.index') }}">
-                         <i class="iconsminds-newspaper"></i> <span class="d-inline-block">{{ __('admin/app.article') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('news.index') }}">
-                         <i class="iconsminds-newspaper"></i> <span class="d-inline-block">{{ __('admin/app.news') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('events.index') }}">
-                         <i class="simple-icon-game-controller"></i> <span class="d-inline-block">{{ __('admin/app.events') }}</span>
-                    </a>
-                </li>
+
                 <li>
                     <a href="#generalSetting">
                         <i class="iconsminds-air-balloon-1"></i> {{ __('admin/app.generalSetting') }}
@@ -79,12 +65,7 @@
                         <i class="simple-icon-picture"></i> <span class="d-inline-block">{{ __('admin/app.sliders') }}</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('type.index') }}">
-                        <i class="simple-icon-picture"></i> <span
-                            class="d-inline-block">{{ __('admin/app.type') }}</span>
-                    </a>
-                </li>
+             
             </ul>
 
         </div>
