@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\App;
+
 
 class City extends Model
 {
@@ -12,6 +14,7 @@ class City extends Model
     use SoftDeletes;
     protected $table='cities';
     protected $guarded=[];
+    public $appends=['name'];
 
     public function users()
     {
@@ -23,5 +26,22 @@ class City extends Model
         return $this->belongsTo('App\Models\Country');
     }
 
+    
+
+
+    public function getNameAttribute()
+    {
+
+        if(App::isLocale('en'))
+        {
+            return $this->attributes['name_en'] ?? $this->attributes['name_ar'];
+
+        }
+        else{
+            return $this->attributes['name_ar'] ?? $this->attributes['name_en'];
+
+        }
+
+    }
 }
 

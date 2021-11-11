@@ -19,7 +19,8 @@
                         <thead>
                             <tr>
                                 <th>{{ __('#') }}</th>
-                                <th>{{ __('admin/app.name') }}</th>
+                                <th>{{ __('admin/app.name_en') }}</th>
+                                <th>{{ __('admin/app.name_ar') }}</th>
                                 <th>{{ __('admin/app.active') }}</th>
                             </tr>
                         </thead>
@@ -27,7 +28,8 @@
                             @foreach ($data as $row)
                             <tr id="row_{{ $row->id }}">
                                 <td> {{$loop->iteration}} </td>
-                                <td> {{ $row->name }}  </td>
+                                <td> {{ $row->name_en }}  </td>
+                                <td> {{ $row->name_ar }}  </td>
 
                                 <td>
                                     <div class="custom-switch custom-switch-primary mb-2">

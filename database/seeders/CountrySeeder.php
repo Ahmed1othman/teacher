@@ -20,7 +20,7 @@ class CountrySeeder extends Seeder
         Country::create(['name_en' => 'Egypt','name_ar'=>'مصر']);
 
         DB::table('cities')->delete();
-        City::create(['name' => 'Cairo','name'=>'القاهرة','country_id'=>1]);
-        City::create(['name' => 'Alexandria','name'=>'الاسكندرية','country_id'=>1]);
+        City::create(['name_en' => 'Cairo','name_ar'=>'القاهرة','country_id'=>1]);
+        City::create(['name_en' => 'Alexandria','name_ar'=>'الاسكندرية','country_id'=>1]);
     }
 }

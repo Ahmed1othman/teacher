@@ -14,12 +14,7 @@
                     </a>
 
                 </li>
-                <li>
-                    <a href="#projects">
-                         <i class="iconsminds-project"></i> <span class="d-inline-block">{{ __('admin/app.projects') }}</span>
-                    </a>
-
-                </li>
+               
                 <li>
                     <a href="#generalSetting">
                         <i class="iconsminds-air-balloon-1"></i> {{ __('admin/app.generalSetting') }}

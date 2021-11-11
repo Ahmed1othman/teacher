@@ -29,13 +29,11 @@ class AuthRegisterRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'type'=>'required|in:customer,dealer',
+            'type'=>'required|in:teacher,student',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:8|confirmed',
-            'bio' => 'sometimes|string',
-            'country_id' => 'nullable|required_if:type,dealer|exists:countries,id',
-            'city_id' => 'nullable|required_if:type,dealer|exists:cities,id',
-            'coin_price' => 'nullable|required_if:type,dealer|integer',
+            'country_id' => 'nullable|exists:countries,id',
+            'city_id' => 'nullable|exists:cities,id',
 
         ];
     }
@@ -44,6 +42,6 @@ class AuthRegisterRequest extends FormRequest
     {
         $errors = (new ValidationException($validator))->errors();
 
-        throw new HttpResponseException(responseFail($errors[array_keys($errors)[0]], 401, $errors));
+        throw new HttpResponseException(responseFail($errors[array_keys($errors)[0]][0], 401, $errors));
     }
 }

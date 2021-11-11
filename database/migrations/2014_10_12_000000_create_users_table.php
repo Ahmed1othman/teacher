@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('reset_code')->nullable();
             $table->integer('rate')->default(0);
-           $table->longText('bio')->nullable();
+            $table->longText('bio')->nullable();
             $table->text('fb_link')->nullable();
             $table->text('tw_link')->nullable();
             $table->text('in_link')->nullable();

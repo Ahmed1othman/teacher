@@ -1,25 +1,23 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-use App\Http\Repositories\Eloquent\AuthRepo;
-use App\Http\Requests\AuthLoginRequest;
-use App\Http\Requests\ChangePasswordRequest;
-use App\Http\Requests\AuthRegisterRequest;
-use App\Http\Requests\ResetCodeRequest;
-use App\Http\Requests\ResetRequest;
-use App\Http\Resources\UserResource;
-use App\Models\User;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\AuthProfileImageRequest;
 use App\Http\Requests\Api\AuthProfileRequest;
-use App\Http\Requests\Api\FCMRequest;
-use Illuminate\Mail\Message;
-use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Facades\Password;
-use App\Mail\Password;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Repositories\Eloquent\AuthRepo;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\AuthRegisterRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Http\Requests\AuthLoginRequest;
+use App\Http\Requests\ResetCodeRequest;
+use App\Http\Requests\Api\FCMRequest;
+use App\Http\Resources\UserResource;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ResetRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Mail\Message;
+use App\Mail\Password;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -30,7 +28,6 @@ class AuthController extends Controller
         $this->repo = $repo;
     }
     
-
     public function forgotEmail(ResetRequest $request)
     {
        try {
