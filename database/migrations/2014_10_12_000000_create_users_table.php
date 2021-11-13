@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->enum('type',array('student','teacher','admin'));
             $table->foreignId('country_id')->nullable()->references('id')->on('countries')->cascadeOnDelete();
             $table->foreignId('city_id')->nullable()->references('id')->on('cities')->cascadeOnDelete();
+            $table->boolean('preliminary')->default(false);
+            $table->boolean('preparatory')->default(false);
+            $table->boolean('secondary')->default(false);
             $table->boolean('active')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();

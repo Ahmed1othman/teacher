@@ -176,5 +176,10 @@ return [
     'you_have_new_offer_for_your_project' => 'you have new offer for your project',
     'you_are_hired_by_project' => 'you are hired by project',
     'projectss_request' => 'Projects Request',
+    'preliminary' => 'Preliminary',
+    'preparatory' => 'Preparatory',
+    'secondary' => 'Secondary',
+    'students' => 'Students',
+    'teachers' => 'Teachers',
 
 ];

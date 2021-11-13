@@ -12,7 +12,6 @@
                 <rect x="1.56" y="15.5" width="16" height="1" />
             </svg>
         </a>
-
         <a href="#" class="menu-button-mobile d-xs-block d-sm-block d-md-none">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 17">
                 <rect x="0.5" y="0.5" width="25" height="1" />
@@ -20,20 +19,7 @@
                 <rect x="0.5" y="15.5" width="25" height="1" />
             </svg>
         </a>
-
-        <div class="search" data-search-path="Pages.Search.html?q=">
-            <input placeholder="Search...">
-            <span class="search-icon">
-                <i class="simple-icon-magnifier"></i>
-            </span>
-        </div>
-
-
     </div>
-
-
-
-
     <div class="navbar-right">
         <div class="header-icons d-inline-block align-middle">
             <div class="d-none d-md-inline-block align-text-bottom mr-3">
@@ -43,18 +29,13 @@
                     <label class="custom-switch-btn" for="switchDark"></label>
                 </div>
             </div>
-
-
-
-            <div class="position-relative d-inline-block">
+            {{-- <div class="position-relative d-inline-block">
                 <button class="header-icon btn btn-empty" type="button" id="languageButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="simple-icon-flag"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right mt-3 position-absolute" id="languageDropdown">
                     <div class="scroll" style="padding:10px">
-
-
                         <div class="d-flex flex-row mb-3  ">
                             <div class="pl-3">
                                 <a rel="alternate" href="{{ route('select','ar') }}">
@@ -69,12 +50,9 @@
                                 </a>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
-            </div>
+            </div> --}}
             <div class="position-relative d-inline-block">
                 <button class="header-icon btn btn-empty" type="button" id="notificationButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -95,13 +73,10 @@
                                 </a>
                             </div>
                         </div>
-
                         @endforeach
                     </div>
                 </div>
-
             </div>
-
             <button class="header-icon btn btn-empty d-none d-sm-inline-block" type="button" id="fullScreenButton">
                 <i class="simple-icon-size-fullscreen"></i>
                 <i class="simple-icon-size-actual"></i>

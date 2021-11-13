@@ -165,7 +165,28 @@ class UserController extends Controller
            return json_encode($response);
        }
     }
- 
+
+    public function changeCategory(Request $request)
+    {
+        try{
+
+            $item=$this->repo->findOrFail($request->id);
+            $data[$request->category]=$request->active;
+            $data= $this->repo->changeStatus($data,$item);
+            if ($data) {
+                $response = ['code' => 1, 'msg' => __('admin/app.success_message')];
+            } else {
+                $response = ['code' => 0, 'msg' => __('admin/app.some_thing_error')];
+            }
+            return json_encode($response);
+
+       } catch (\Exception $e) {
+           DB::rollback();
+           $response = ['code' => 0, 'msg' => __('admin/app.some_thing_error')];
+           return json_encode($response);
+       }
+    }
+
 
 
 }

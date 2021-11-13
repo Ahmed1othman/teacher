@@ -58,6 +58,35 @@ function modelActive(id, url) {
     });
 }
 
+function changeCategory(id, category) {
+    var active = $("#" + category + "_" + id).val();
+    if (active == 1) {
+        $("#" + category + "_" + id).prop('checked', true);
+        document.getElementById(category + "_" + id).value = 0;
+
+    } else {
+        $("#" + category + "_" + id).prop('checked', false);
+        document.getElementById(category + "_" + id).value = 1;
+    }
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: app_url + "/category-active",
+        type: 'POST',
+        data: { _token: $('meta[name="csrf-token"]').attr('content'), active: active, category: category, id: id },
+        async: false,
+        success: function(data) {
+            var obj = JSON.parse(data);
+            showNotification('top', 'center', "primary", 'Success',
+                obj.msg);
+        },
+        error: function(error) {
+            showNotification('top', 'center', "danger", 'Error', obj.msg);
+        }
+    });
+}
+
 function modelStatus(id, url) {
     var status = $("#status_" + id).val();
     if (status == 1) {

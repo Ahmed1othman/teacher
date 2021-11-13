@@ -34,6 +34,7 @@ Route::group(['middleware'=>['auth','language']],function (){
     Route::resource('partners', PartnerController::class);
 
     Route::resource('users', UserController::class);
+    Route::post('category-active', [UserController::class,'changeCategory']);
     Route::post('users-active', [UserController::class,'changeStatus']);
 
     Route::resource('contacts', ContactController::class);

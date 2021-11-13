@@ -176,5 +176,7 @@ return [
     'you_have_new_offer_for_your_project' => 'لديك عرض جديد لمشروعك',
     'you_are_hired_by_project' => 'أنت وظفت بالمشروع',
     'projectss_request' => 'طلب مشاريع',
-
+    'preliminary' => 'تمهيدى',
+    'preparatory' => 'اعدادى',
+    'secondary' => 'ثانوى',
 ];

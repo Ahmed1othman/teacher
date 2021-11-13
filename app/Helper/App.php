@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Info;
+use App\Models\User;
 
 if (!function_exists('websiteInfo')) {
     function websiteInfo($key)
@@ -13,6 +14,31 @@ if (!function_exists('websiteInfo')) {
             return $info->value;
         }
         return false;
+    }
+
+}
+
+if (!function_exists('countStudents')) {
+    function countStudents()
+    {
+       $students=User::where('type','student')->get();
+       return count($students);
+    }
+
+}
+if (!function_exists('countTeachers')) {
+    function countTeachers()
+    {
+       $Teachers=User::where('type','teacher')->get();
+       return count($Teachers);
+    }
+
+}
+if (!function_exists('countUsers')) {
+    function countUsers()
+    {
+       $Users=User::where('type','!=','admin')->get();
+       return count($Users);
     }
 
 }
