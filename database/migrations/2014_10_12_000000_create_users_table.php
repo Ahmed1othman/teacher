@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('country_id')->nullable()->references('id')->on('countries')->cascadeOnDelete();
             $table->foreignId('city_id')->nullable()->references('id')->on('cities')->cascadeOnDelete();
             $table->boolean('preliminary')->default(false);
+            $table->boolean('primary')->default(false);
             $table->boolean('preparatory')->default(false);
             $table->boolean('secondary')->default(false);
             $table->boolean('active')->default(true);

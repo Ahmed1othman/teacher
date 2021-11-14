@@ -181,5 +181,9 @@ return [
     'secondary' => 'Secondary',
     'students' => 'Students',
     'teachers' => 'Teachers',
+    'preliminary' => 'Preliminary',
+    'primary' => 'Primary',
+    'preparatory' => 'Preparatory',
+    'secondary' => 'Secondary',
 
 ];

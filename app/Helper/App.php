@@ -26,6 +26,7 @@ if (!function_exists('countStudents')) {
     }
 
 }
+
 if (!function_exists('countTeachers')) {
     function countTeachers()
     {
@@ -34,6 +35,7 @@ if (!function_exists('countTeachers')) {
     }
 
 }
+
 if (!function_exists('countUsers')) {
     function countUsers()
     {
@@ -41,6 +43,38 @@ if (!function_exists('countUsers')) {
        return count($Users);
     }
 
+}
+
+if (!function_exists('countPreliminaryUsers')) {
+    function countPreliminaryUsers()
+    {
+       $Users=User::where('preliminary',1)->get();
+       return count($Users);
+    }
+}
+
+if (!function_exists('countPrimaryUsers')) {
+    function countPrimaryUsers()
+    {
+       $Users=User::where('primary',1)->get();
+       return count($Users);
+    }
+}
+
+if (!function_exists('countPreparatoryUsers')) {
+    function countPreparatoryUsers()
+    {
+       $Users=User::where('preparatory',1)->get();
+       return count($Users);
+    }
+}
+
+if (!function_exists('countSecondaryUsers')) {
+    function countSecondaryUsers()
+    {
+       $Users=User::where('secondary',1)->get();
+       return count($Users);
+    }
 }
 
 
@@ -53,8 +87,6 @@ function responseSuccess($data = [], $msg = null, $code = 200)
     ], 200);
 }
 
-
-
 function responseFail( $error_msg = null , $code = 400, $result = null)
 {
     return response()->json([
@@ -63,7 +95,6 @@ function responseFail( $error_msg = null , $code = 400, $result = null)
         "code"=>$code
     ], 400);
 }
-
 
 function responseValidation($errors = null, $code = 403)
 {

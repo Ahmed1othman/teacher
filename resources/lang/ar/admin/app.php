@@ -179,4 +179,7 @@ return [
     'preliminary' => 'تمهيدى',
     'preparatory' => 'اعدادى',
     'secondary' => 'ثانوى',
+    'students' => 'طلاب',
+    'teachers' => 'مدرسون',
+    'primary' => 'ابتدائى',
 ];
