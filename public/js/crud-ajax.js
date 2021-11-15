@@ -58,23 +58,22 @@ function modelActive(id, url) {
     });
 }
 
-function changeCategory(id, category) {
-    var active = $("#" + category + "_" + id).val();
+function changeCategory(category_id, user_id) {
+    var active = $("#category_" + category_id + "_" + user_id).val();
     if (active == 1) {
-        $("#" + category + "_" + id).prop('checked', true);
-        document.getElementById(category + "_" + id).value = 0;
-
+        $("#category_" + category_id + "_" + user_id).prop('checked', true);
+        document.getElementById("category_" + category_id + "_" + user_id).value = 0;
     } else {
-        $("#" + category + "_" + id).prop('checked', false);
-        document.getElementById(category + "_" + id).value = 1;
+        $("#category_" + category_id + "_" + user_id).prop('checked', false);
+        document.getElementById("category_" + category_id + "_" + user_id).value = 1;
     }
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: app_url + "/category-active",
+        url: app_url + "/category-assign",
         type: 'POST',
-        data: { _token: $('meta[name="csrf-token"]').attr('content'), active: active, category: category, id: id },
+        data: { _token: $('meta[name="csrf-token"]').attr('content'), active: active, category_id: category_id, user_id: user_id },
         async: false,
         success: function(data) {
             var obj = JSON.parse(data);

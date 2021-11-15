@@ -61,11 +61,16 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('categories.index') }}">
+                        <i class="simple-icon-picture"></i> <span class="d-inline-block">{{ __('admin/app.categories') }}</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('sliders.index') }}">
                         <i class="simple-icon-picture"></i> <span class="d-inline-block">{{ __('admin/app.sliders') }}</span>
                     </a>
                 </li>
-             
+
             </ul>
 
         </div>

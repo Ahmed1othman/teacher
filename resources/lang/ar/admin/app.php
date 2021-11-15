@@ -182,4 +182,6 @@ return [
     'students' => 'طلاب',
     'teachers' => 'مدرسون',
     'primary' => 'ابتدائى',
+    'categories' => 'فئات',
+    'category' => 'فئة',
 ];

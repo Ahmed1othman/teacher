@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\LectureController;
 use App\Http\Controllers\Api\InfoController;
 use App\Http\Controllers\Api\LookUp\CityController;
 use App\Http\Controllers\Api\LookUp\SliderController;
@@ -33,13 +33,13 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
         Route::post('profile', [AuthController::class,'profile']);
         Route::put('changePassword', [AuthController::class,'changePassword']);
 
-        Route::group([ 'prefix' => 'projects'], function () {
-            Route::get('/', [ProjectController::class,'index']);
-            Route::post('/', [ProjectController::class,'store']);
-            Route::get('{project}', [ProjectController::class,'get']);
-            Route::put('{project}', [ProjectController::class,'update']);
-            Route::delete('bulkDelete', [ProjectController::class,'bulkDelete']);
-            Route::post('bulkRestore', [ProjectController::class,'bulkRestore']);
+        Route::group([ 'prefix' => 'lectures'], function () {
+            Route::get('/', [LectureController::class,'index']);
+            Route::post('/', [LectureController::class,'store']);
+            Route::get('{lecture}', [LectureController::class,'get']);
+            Route::put('{lecture}', [LectureController::class,'update']);
+            Route::delete('bulkDelete', [LectureController::class,'bulkDelete']);
+            Route::post('bulkRestore', [LectureController::class,'bulkRestore']);
         });
 
         Route::group(['prefix' => 'rate'], function () {

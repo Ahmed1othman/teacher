@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Info;
+use App\Models\TeacherCategory;
 use App\Models\User;
 
 if (!function_exists('websiteInfo')) {
@@ -61,11 +63,26 @@ if (!function_exists('countPrimaryUsers')) {
     }
 }
 
-if (!function_exists('countPreparatoryUsers')) {
-    function countPreparatoryUsers()
+if (!function_exists('countUserCategory')) {
+    function countUserCategory()
     {
-       $Users=User::where('preparatory',1)->get();
-       return count($Users);
+        $data=[];
+        $categories=Category::all();
+        foreach($categories as $category){
+            $users = User::whereHas('categories' ,function ($query) use($category) {
+                $query->where('category_id' ,$category->id);
+            })->get();
+
+            $data[$category->name]=count($users);
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('categoriesDetails')) {
+    function categoriesDetails($category_id,$user_id)
+    {
+        return TeacherCategory::where('category_id',$category_id)->where('user_id',$user_id)->where('active',1)->first();
     }
 }
 

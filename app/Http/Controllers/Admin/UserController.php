@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Eloquent\UserRepo;
 use App\Http\Requests\Api\AuthProfileRequest;
+use App\Models\Category;
+use App\Models\TeacherCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,9 +30,10 @@ class UserController extends Controller
 
     public function index()
     {
+        $categories=Category::all();
         $data = $this->repo->getWhereOperand('type','!=','admin');
         $title = $this->modelName;
-        return view($this->namespaceName . '.' . $this->modelName . '.index', compact('data', 'title'));
+        return view($this->namespaceName . '.' . $this->modelName . '.index', compact('data', 'title','categories'));
     }
 
     /**
@@ -169,11 +172,19 @@ class UserController extends Controller
     public function changeCategory(Request $request)
     {
         try{
+            $data=TeacherCategory::where('category_id',$request->category_id)->where('user_id',$request->user_id)->first();
+            if($data){
+                $input['active']=$request->active;
+               $result = $data->update($input);
+            }else{
+                $input=[
+                    'category_id'=>$request->category_id,
+                    'user_id'=>$request->user_id
+                ];
+                $result =  TeacherCategory::create($input);
+            }
 
-            $item=$this->repo->findOrFail($request->id);
-            $data[$request->category]=$request->active;
-            $data= $this->repo->changeStatus($data,$item);
-            if ($data) {
+            if ($result) {
                 $response = ['code' => 1, 'msg' => __('admin/app.success_message')];
             } else {
                 $response = ['code' => 0, 'msg' => __('admin/app.some_thing_error')];

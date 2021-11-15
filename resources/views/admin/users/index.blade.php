@@ -18,9 +18,9 @@
                                 <th>{{ __('admin/app.rate') }}</th>
                                 <th>{{ __('admin/app.email') }}</th>
                                 <th>{{ __('admin/app.type') }}</th>
-                                <th>{{ __('admin/app.preliminary') }}</th>
-                                <th>{{ __('admin/app.preparatory') }}</th>
-                                <th>{{ __('admin/app.secondary') }}</th>
+                                @foreach ($categories as $category)
+                                <th>{{ $category->name }}</th>
+                                @endforeach
                                 <th>{{ __('admin/app.active') }}</th>
                             </tr>
                         </thead>
@@ -32,32 +32,14 @@
                                 <td> {{ $row->rate }} <i class="simple-icon-star text-warning" aria-hidden="true"></i> </td>
                                 <td> {{ $row->email }} </td>
                                 <td> {{ $row->type }} </td>
+                                @foreach ($categories as $category)
                                 <td>
-                                    @if($row->type=='teacher')
                                     <div class="custom-switch custom-switch-primary mb-2">
-                                        <input class="custom-switch-input" id="preliminary_{{ $row->id }}" {{ $row->preliminary==1?'checked':'' }} value="{{ $row->preliminary==1?0:1 }}" name="preliminary" type="checkbox">
-                                        <label class="custom-switch-btn" onclick="changeCategory({{ $row->id }},'preliminary')" ></label>
+                                        <input class="custom-switch-input" id="category_{{ $category->id }}_{{ $row->id }}" {{ categoriesDetails($category->id,$row->id)?'checked':'' }} value="{{ categoriesDetails($category->id,$row->id)?0:1 }}" name="preliminary" type="checkbox">
+                                        <label class="custom-switch-btn" onclick="changeCategory({{ $category->id }},{{ $row->id }},'preliminary')" ></label>
                                      </div>
-                                     @endif
-                                    </td>
-                                    <td>
-                                    @if($row->type=='teacher')
-
-                                        <div class="custom-switch custom-switch-primary mb-2">
-                                        <input class="custom-switch-input" id="preparatory_{{ $row->id }}" {{ $row->preparatory==1?'checked':'' }} value="{{ $row->preparatory==1?0:1 }}" name="preparatory" type="checkbox">
-                                        <label class="custom-switch-btn" onclick="changeCategory({{ $row->id }},'preparatory')"  ></label>
-                                     </div>
-                                     @endif
                                 </td>
-                                <td>
-                                    @if($row->type=='teacher')
-
-                                    <div class="custom-switch custom-switch-primary mb-2">
-                                        <input class="custom-switch-input" id="secondary_{{ $row->id }}" {{ $row->secondary==1?'checked':'' }} value="{{ $row->secondary==1?0:1 }}" name="secondary" type="checkbox">
-                                        <label class="custom-switch-btn" onclick="changeCategory({{ $row->id }},'secondary')"  ></label>
-                                     </div>
-                                     @endif
-                                </td>
+                                @endforeach
                                 <td>
                                     <div class="custom-switch custom-switch-primary mb-2">
                                         <input class="custom-switch-input" id="active_{{ $row->id }}" {{ $row->active==1?'checked':'' }} value="{{ $row->active==1?0:1 }}" name="active" type="checkbox">

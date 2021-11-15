@@ -39,74 +39,24 @@
             </a>
         </div>
     </div>
-    <div class="col-xl-4 col-lg-4">
-        <div class="card mb-4 progress-banner">
-            <div class="card-body justify-content-between d-flex flex-row align-items-center">
-                <div>
-                    <i class="iconsminds-male mr-2 text-white align-text-bottom d-inline-block"></i>
-                    <div>
-                        <p class="lead text-white">{{ countPreliminaryUsers() }} {{ __('admin/app.preliminary') }}</p>
-
-                    </div>
-                </div>
-                <div>
-                    <div role="progressbar" class="progress-bar-circle progress-bar-banner position-relative" data-color="white" data-trail-color="rgba(255,255,255,0.2)" aria-valuenow="{{ countPreliminaryUsers() }}" aria-valuemax="{{ countUsers() }}" data-show-percent="false">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @foreach (countUserCategory() as $key => $value)
     <div class="col-xl-4 col-lg-4">
         <div class="card mb-4 progress-banner">
             <a href="#" class="card-body justify-content-between d-flex flex-row align-items-center">
                 <div>
                     <i class="iconsminds-male mr-2 text-white align-text-bottom d-inline-block"></i>
                     <div>
-                        <p class="lead text-white"> {{ countPrimaryUsers() }} {{ __('admin/app.primary') }}</p>
-
+                        <p class="lead text-white">{{ $value }} {{ $key }} </p>
                     </div>
                 </div>
                 <div>
-                    <div role="progressbar" class="progress-bar-circle progress-bar-banner position-relative" data-color="white" data-trail-color="rgba(255,255,255,0.2)" aria-valuenow="{{ countPrimaryUsers() }}" aria-valuemax="{{ countUsers() }}" data-show-percent="false">
+                    <div role="progressbar" class="progress-bar-circle progress-bar-banner position-relative" data-color="white" data-trail-color="rgba(255,255,255,0.2)" aria-valuenow="{{ $value }}" aria-valuemax="{{ countUsers() }}" data-show-percent="false">
                     </div>
                 </div>
             </a>
         </div>
     </div>
-    <div class="col-xl-4 col-lg-4">
-        <div class="card mb-4 progress-banner">
-            <div class="card-body justify-content-between d-flex flex-row align-items-center">
-                <div>
-                    <i class="iconsminds-male mr-2 text-white align-text-bottom d-inline-block"></i>
-                    <div>
-                        <p class="lead text-white">{{ countPreparatoryUsers() }} {{ __('admin/app.preparatory') }}</p>
-
-                    </div>
-                </div>
-                <div>
-                    <div role="progressbar" class="progress-bar-circle progress-bar-banner position-relative" data-color="white" data-trail-color="rgba(255,255,255,0.2)" aria-valuenow="{{ countPreparatoryUsers() }}" aria-valuemax="{{ countUsers() }}" data-show-percent="false">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4">
-        <div class="card mb-4 progress-banner">
-            <a href="#" class="card-body justify-content-between d-flex flex-row align-items-center">
-                <div>
-                    <i class="iconsminds-male mr-2 text-white align-text-bottom d-inline-block"></i>
-                    <div>
-                        <p class="lead text-white"> {{ countSecondaryUsers() }} {{ __('admin/app.secondary') }}</p>
-
-                    </div>
-                </div>
-                <div>
-                    <div role="progressbar" class="progress-bar-circle progress-bar-banner position-relative" data-color="white" data-trail-color="rgba(255,255,255,0.2)" aria-valuenow="{{ countSecondaryUsers() }}" aria-valuemax="{{ countUsers() }}" data-show-percent="false">
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
+    @endforeach
 </div>
 
 @endsection

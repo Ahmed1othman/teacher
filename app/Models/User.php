@@ -13,7 +13,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable , SoftDeletes;
- 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -32,6 +32,13 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     public $appends = ['photo','name'];
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Category', 'teacher_categories', 'user_id', 'category_id');
+    }
+
+  
 
     public function getNameAttribute()
     {

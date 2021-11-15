@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Info;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,9 @@ class InfoSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('categories')->delete();
+        Category::create(['name' => 'رياض']);
+        Category::create(['name' => 'تمهيدى']);
         DB::table('infos')->delete();
         Info::create(['option' => 'website_name_en','value' => 'Teacher','type' => 'string']);
         Info::create(['option' => 'website_name_ar','value' => 'Teacher','type' => 'string']);

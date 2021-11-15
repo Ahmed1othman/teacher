@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\InfoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NotificationsController;
@@ -34,7 +35,7 @@ Route::group(['middleware'=>['auth','language']],function (){
     Route::resource('partners', PartnerController::class);
 
     Route::resource('users', UserController::class);
-    Route::post('category-active', [UserController::class,'changeCategory']);
+    Route::post('category-assign', [UserController::class,'changeCategory']);
     Route::post('users-active', [UserController::class,'changeStatus']);
 
     Route::resource('contacts', ContactController::class);
@@ -48,6 +49,9 @@ Route::group(['middleware'=>['auth','language']],function (){
 
     Route::resource('sliders', SliderController::class);
     Route::post('sliders-active', [SliderController::class,'changeStatus']);
+
+    Route::resource('categories', CategoryController::class);
+    Route::post('categories-active', [CategoryController::class,'changeStatus']);
 
     Route::resource('projects', ProjectController::class);
     Route::get('projects-request', [ProjectController::class,'projectsRequest'])->name('projects.request');
