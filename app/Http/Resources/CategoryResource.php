@@ -18,7 +18,10 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'photo' => $this->photo
+            'photo' => $this->image,
+            'teachers_number' => count($this->teachers),
+
+            'teachers' =>  UserResource::collection($this->teachers),
         ];
     }
 }

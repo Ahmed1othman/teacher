@@ -18,11 +18,14 @@ class LectureResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'photo' => $this->photo,
-            'category' => $this->category,
-            'user' => $this->user,
+            'time' => $this->time,
+            'photo' => $this->image,
+            'type' => $this->type,
+            'category' => new CategoryResource($this->category()->first()),
+            'user' => new UserResource($this->user()->first()),
             'month' => $this->month,
             'active' => $this->active
         ];
     }
+
 }

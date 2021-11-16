@@ -64,6 +64,7 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
     });
 
     Route::get('info', [InfoController::class,'index']);
+    Route::get('categories', [InfoController::class,'categories']);
 
     Route::post('contacts', [ContactController::class,'store']);
 

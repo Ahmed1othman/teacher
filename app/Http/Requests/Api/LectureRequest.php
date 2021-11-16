@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Http\Requests\Api;
+
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\ValidationException;
+
 
 class LectureRequest extends FormRequest
 {
@@ -19,7 +24,6 @@ class LectureRequest extends FormRequest
     public function rules()
     {
 
-
         switch ($this->method()) {
             case 'GET':
             case 'DELETE':
@@ -32,8 +36,7 @@ class LectureRequest extends FormRequest
                     'name' => 'required|string|min:2',
                     'type' => 'required|in:single,group',
                     'month'=>'required|integer|min:1|max:12',
-                    'time' => 'required|timezone',
-
+                    'time' => 'required',
                     'category_id'=>'required|exists:categories,id,deleted_at,NULL',
                     'photo'=>'required|image|mimes:jpeg,bmp,png|max:4096'
                 ];
@@ -44,7 +47,7 @@ class LectureRequest extends FormRequest
                 return [
                     'name' => 'required|string|min:2',
                     'type' => 'required|in:single,group',
-                    'time' => 'required|timezone',
+                    'time' => 'required',
                     'month'=>'required|integer|min:1|max:12',
                     'category_id'=>'required|exists:categories,id,deleted_at,NULL',
                     'photo'=>'required|image|mimes:jpeg,bmp,png|max:4096'
@@ -54,13 +57,10 @@ class LectureRequest extends FormRequest
         }
     }
 
-    public function messages()
+    protected function failedValidation(Validator $validator)
     {
-        return [
-            'name.required' => 'name is required!',
-            'photo.required' => 'photo is required!',
-            'photo.image' => 'photo is image!'
-        ];
+        $errors = (new ValidationException($validator))->errors();
+        throw new HttpResponseException(responseFail('Validation Error', 401, $errors));
     }
 
 }

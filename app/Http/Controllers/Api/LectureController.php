@@ -59,12 +59,14 @@ class LectureController extends Controller
 
     public function store(LectureRequest $request)
     {
+
         try {
             $input = [
                 'name' => $request->name,
                 'month' => $request->month,
                 'category_id' => $request->category_id,
                 'type' => $request->type,
+                'time' => $request->time,
                 'user_id' => auth()->id(),
             ];
             $fileUpload = request()->file('photo');
@@ -94,16 +96,15 @@ class LectureController extends Controller
             'month' => $request->month,
             'category_id' => $request->category_id,
             'type' => $request->type,
+            'time' => $request->time,
             'user_id' => auth()->id(),
         ];
-
         $fileUpload = request()->file('photo');
         if ($fileUpload) {
             FacadesFile::delete('public/lectures/' . $item->photo);
             $input['photo'] = $this->repo->storeFile($fileUpload, 'lectures');
         }
         $data = $this->repo->update($input, $item);
-
         if ($data) {
             return responseSuccess(new LectureResource($item->refresh()), __('app.data_Updated_successfully'));
         } else {
