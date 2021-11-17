@@ -20,24 +20,18 @@ class UserSeeder extends Seeder
 
 
         $users = new User();
-        $users->first_name = "Mustafa";
-        $users->last_name = "Ali";
+        $users->name = "Mustafa";
         $users->phone = "0123456789";
         $users->email = "admin@admin.com";
-        $users->country_id = 1;
         $users->active = 1;
-        $users->city_id = 1;
         $users->type = "admin";
         $users->password = Hash::make('12345678');
         $users->save();
         $users = new User();
-        $users->first_name = "teacher";
-        $users->last_name = "tt";
+        $users->name = "teacher";
         $users->phone = "0123456789";
         $users->email = "teacher@gmail.com";
-        $users->country_id = 1;
         $users->active = 1;
-        $users->city_id = 1;
         $users->type = "teacher";
         $users->password = Hash::make('12345678');
         $users->save();

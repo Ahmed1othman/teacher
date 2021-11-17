@@ -9,7 +9,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#users">
+                    <a href="{{ route('users.index') }}">
                          <i class="simple-icon-user-following"></i> <span class="d-inline-block">{{ __('admin/app.users') }}</span>
                     </a>
                 </li>
@@ -33,11 +33,11 @@
                         <i class="simple-icon-user-following"></i> <span class="d-inline-block">{{ __('admin/app.users') }}</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('partners.index') }}">
                         <i class="iconsminds-digital-drawing"></i> <span class="d-inline-block">{{ __('admin/app.partners') }}</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
             <ul class="list-unstyled" data-link="generalSetting">
                 <li>
@@ -50,7 +50,7 @@
                         <i class="simple-icon-bubbles"></i> <span class="d-inline-block">{{ __('admin/app.contacts') }}</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('countries.index') }}">
                         <i class="simple-icon-flag"></i> <span class="d-inline-block">{{ __('admin/app.countries') }}</span>
                     </a>
@@ -59,17 +59,17 @@
                     <a href="{{ route('cities.index') }}">
                         <i class="simple-icon-flag"></i> <span class="d-inline-block">{{ __('admin/app.cities') }}</span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="{{ route('categories.index') }}">
                         <i class="simple-icon-picture"></i> <span class="d-inline-block">{{ __('admin/app.categories') }}</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('sliders.index') }}">
                         <i class="simple-icon-picture"></i> <span class="d-inline-block">{{ __('admin/app.sliders') }}</span>
                     </a>
-                </li>
+                </li> --}}
 
             </ul>
 

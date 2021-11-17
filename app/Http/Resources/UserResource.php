@@ -31,17 +31,15 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
+            'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
             'rate' => $this->rate,
             'type' => $this->type,
             'image' => $this->photo,
             'bio' => $this->bio,
+            'category' => new CategoryResource($this->category()->first()),
             'active' => $this->active,
-            'country' => new CountryResource($this->country()->first()),
-            'city' => new CityResource($this->city()->first()),
             'create_dates' => [
                 'created_at_human' => $this->created_at->diffForHumans(),
                 'created_at' => $this->created_at

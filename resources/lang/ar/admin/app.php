@@ -184,4 +184,5 @@ return [
     'primary' => 'ابتدائى',
     'categories' => 'فئات',
     'category' => 'فئة',
+    'this_appointment_compleated' => 'هذا المعاد مكتمل',
 ];

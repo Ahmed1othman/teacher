@@ -10,7 +10,8 @@ use App\Http\Controllers\Api\LookUp\PartnerController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\RateController;
-use App\Http\Controllers\Api\OfferController;
+use App\Http\Controllers\Api\AppointmentController;
+use App\Http\Controllers\Api\BookController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -50,15 +51,22 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
             Route::delete('bulkDelete', [RateController::class, 'bulkDelete']);
             Route::post('bulkRestore', [RateController::class, 'bulkRestore']);
         });
-        Route::group(['prefix' => 'offers'], function () {
-            Route::get('/', [OfferController::class, 'index']);
-            Route::post('/', [OfferController::class, 'store']);
-            Route::post('/accept-offer', [OfferController::class, 'acceptOffer']);
-            Route::post('/reject-offer', [OfferController::class, 'rejectOffer']);
-            Route::get('{offer}', [OfferController::class, 'get']);
-            Route::put('{offer}', [OfferController::class, 'update']);
-            Route::delete('bulkDelete', [OfferController::class, 'bulkDelete']);
-            Route::post('bulkRestore', [OfferController::class, 'bulkRestore']);
+
+        Route::group(['prefix' => 'appointments'], function () {
+            Route::get('/', [AppointmentController::class, 'index']);
+            Route::post('/', [AppointmentController::class, 'store']);
+            Route::get('{appointment}', [AppointmentController::class, 'get']);
+            Route::put('{appointment}', [AppointmentController::class, 'update']);
+            Route::delete('bulkDelete', [AppointmentController::class, 'bulkDelete']);
+            Route::post('bulkRestore', [AppointmentController::class, 'bulkRestore']);
+        });
+        Route::group(['prefix' => 'books'], function () {
+            Route::get('/', [BookController::class, 'index']);
+            Route::post('/', [BookController::class, 'store']);
+            Route::get('{book}', [BookController::class, 'get']);
+            Route::put('{book}', [BookController::class, 'update']);
+            Route::delete('bulkDelete', [BookController::class, 'bulkDelete']);
+            Route::post('bulkRestore', [BookController::class, 'bulkRestore']);
         });
         Route::get('/notifications', [NotificationController::class, 'index']);
     });

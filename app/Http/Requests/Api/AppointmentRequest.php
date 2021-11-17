@@ -2,27 +2,28 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Rules\RateExists;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
 
-class RateRequest extends FormRequest
-{
 
+class AppointmentRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+
     public function rules()
     {
+
         switch ($this->method()) {
             case 'GET':
             case 'DELETE':
@@ -32,23 +33,17 @@ class RateRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'value' => 'required|string|max:5',
-                    'photo' => 'image',
-                    'id' => 'required|exists:users,id',
+                    'time' => 'required|integer|min:1|max:24',
                 ];
             }
             case 'PATCH':
             case 'PUT':
             {
                 return [
-                    'value' => 'required|string|max:5',
-                    'photo' => 'image',
-                    'id' => 'required|exists:users,id',
-
+                    'time' => 'required|integer|min:1|max:24',
                 ];
             }
-            default:
-                break;
+            default:break;
         }
     }
 
@@ -59,3 +54,5 @@ class RateRequest extends FormRequest
     }
 
 }
+
+

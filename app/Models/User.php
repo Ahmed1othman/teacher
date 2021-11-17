@@ -31,19 +31,19 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    public $appends = ['photo','name'];
+    public $appends = ['photo'];
 
     public function categories()
     {
         return $this->belongsToMany('App\Models\Category', 'teacher_categories', 'user_id', 'category_id');
     }
 
-  
-
-    public function getNameAttribute()
+    public function category()
     {
-        return $this->attributes['first_name'] .' '. $this->attributes['last_name'];
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
+
+
 
     public function getPhotoAttribute()
     {

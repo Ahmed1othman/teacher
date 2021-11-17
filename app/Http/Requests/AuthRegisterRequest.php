@@ -27,14 +27,10 @@ class AuthRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'type'=>'required|in:teacher,student',
             'email' => 'required|unique:users,email',
-            'password' => 'required|min:8|confirmed',
-            'country_id' => 'nullable|exists:countries,id',
-            'city_id' => 'nullable|exists:cities,id',
-
+            'password' => 'required|min:8|confirmed'
         ];
     }
 

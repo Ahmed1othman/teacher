@@ -3,22 +3,23 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\Eloquent\RateRepo;
-use App\Http\Requests\Api\RateRequest;
+use App\Http\Repositories\Eloquent\AppointmentRepo;
+use App\Http\Requests\Api\BookRequest;
+use App\Http\Requests\Api\AppointmentRequest;
 use App\Http\Requests\BulkDeleteRequest;
-use App\Http\Resources\RateResource;
+use App\Http\Resources\AppointmentResource;
 use App\Http\Resources\SearchResource;
-use App\Models\Rate;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File as FacadesFile;
 use Illuminate\Support\Facades\Schema;
 
-class RateController extends Controller
+class AppointmentController extends Controller
 {
     protected $repo;
 
-    public function __construct(RateRepo $repo)
+    public function __construct(AppointmentRepo $repo)
     {
         $this->repo = $repo;
 
@@ -27,7 +28,7 @@ class RateController extends Controller
     public function index(Request $request)
     {
         $input = $this->repo->inputs($request->all());
-        $model = new Rate();
+        $model = new Appointment();
         $columns = Schema::getColumnListing($model->getTable());
 
         if (count($input["columns"]) < 1 || (count($input["columns"]) != count($input["column_values"])) || (count($input["columns"]) != count($input["operand"]))) {
@@ -39,7 +40,7 @@ class RateController extends Controller
         $data = $this->repo->Paginate($input, $wheres);
 
         return responseSuccess([
-            'data' => $input["resource"] == "all" ? RateResource::collection($data) : SearchResource::collection($data),
+            'data' => $input["resource"] == "all" ? AppointmentResource::collection($data) : SearchResource::collection($data),
             'meta' => [
                 'total' => $data->count(),
                 'currentPage' => $input["offset"],
@@ -53,74 +54,39 @@ class RateController extends Controller
         $data = $this->repo->findOrFail($id);
 
         return responseSuccess([
-            'data' => new RateResource($data),
+            'data' => new AppointmentResource($data),
         ], __('app.data_returned_successfully'));
     }
 
-    public function store(RateRequest $request)
+    public function store(AppointmentRequest $request)
     {
-
-        try {
+        // try {
             $input = [
-                'value' => $request->value,
-                'message' => $request->message,
+                'time' => $request->time,
                 'user_id' => auth()->id(),
-                'rateable_id' => $request->id,
             ];
-
-            $input['rateable_type'] = 'App\Models\User';
-
-
-            $fileUpload = request()->file('photo');
-            if ($fileUpload) {
-                $input['photo'] = $this->repo->storeFile($fileUpload, 'rates');
-            }
             $data = $this->repo->create($input);
-
-            $product = $input['rateable_type']::findorFail($data->rateable_id);
-            if ($product) {
-                $all_product_rates = 0;
-                foreach ($product->rateable as $rate) {
-                    $all_product_rates += $rate->value;
-                }
-
-                $product->rate = $all_product_rates / count($product->rateable);
-                $product->save();
-            }
-
             if ($data) {
-                return responseSuccess(new RateResource($data));
+                return responseSuccess(new AppointmentResource($data));
             } else {
                 return responseFail(__('app.some_thing_error'));
             }
-
-        } catch (\Exception $e) {
-            return responseFail(__('app.some_thing_error'));
-        }
-
+        // } catch (\Exception $e) {
+        //     return responseFail(__('app.some_thing_error'));
+        // }
     }
 
-    public function update($id, RateRequest $request)
+    public function update($id, AppointmentRequest $request)
     {
         $item = $this->repo->findOrFail($id);
         $input = [
-            'value' => $request->value ?? $item->value,
-            'message' => $request->message ?? $item->message,
-            'rateable_id' => $request->id,
+            'time' => $request->time,
             'user_id' => auth()->id(),
         ];
-        $input['rateable_type'] = 'App\Models\User';
 
-
-        $fileUpload = request()->file('photo');
-        if ($fileUpload) {
-            FacadesFile::delete('public/rates/' . $item->photo);
-            $input['photo'] = $this->repo->storeFile($fileUpload, 'rates');
-        }
         $data = $this->repo->update($input, $item);
-
         if ($data) {
-            return responseSuccess(new RateResource($item->refresh()), __('app.data_Updated_successfully'));
+            return responseSuccess(new AppointmentResource($item->refresh()), __('app.data_Updated_successfully'));
         } else {
             return responseFail(__('app.some_thing_error'));
         }
@@ -131,7 +97,6 @@ class RateController extends Controller
 
         DB::beginTransaction();
         try {
-
             $data = $this->repo->bulkDelete($request->ids);
             if ($data) {
 

@@ -184,5 +184,7 @@ return [
     'primary' => 'Primary',
     'categories' => 'Categories',
     'category' => 'Category',
+    'this_appointment_compleated' => "this appointment compleated",
+
 
 ];
