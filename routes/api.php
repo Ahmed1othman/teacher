@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\LectureController;
 use App\Http\Controllers\Api\InfoController;
@@ -13,8 +12,6 @@ use App\Http\Controllers\Api\RateController;
 use App\Http\Controllers\Api\AppointmentController;
 use App\Http\Controllers\Api\BookController;
 use Illuminate\Support\Facades\Route;
-
-
 
 Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () {
 
@@ -73,9 +70,7 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
 
     Route::get('info', [InfoController::class,'index']);
     Route::get('categories', [InfoController::class,'categories']);
-
     Route::post('contacts', [ContactController::class,'store']);
-
     Route::group(['middleware' => [], 'namespace' => 'LookUp'], function () {
         Route::group([ 'prefix' => 'country'], function () {
             Route::get('/', [CountryController::class,'index']);

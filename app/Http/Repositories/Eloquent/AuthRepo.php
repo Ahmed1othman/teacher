@@ -40,10 +40,10 @@ class AuthRepo extends AbstractRepo implements AuthRepoInterface
     {
         try {
             $user=User::where("email",$data['email'])->first();
-            if($user->type=='admin'){
-                return responseFail(__('You Don\'t have permission to login'), 403);
-            }
             if($user && Hash::check($data['password'],$user->password)){
+                if($user->type=='admin'){
+                    return responseFail(__('You Don\'t have permission to login'), 403);
+                }
                 $userValid['email']=$data['email'];
                 $userValid['password']=$data['password'];
                 if (! $token = JWTAuth::attempt($userValid)) {
