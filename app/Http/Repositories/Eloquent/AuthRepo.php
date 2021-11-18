@@ -3,14 +3,14 @@
 namespace App\Http\Repositories\Eloquent;
 
 use App\Http\Repositories\Interfaces\AuthRepoInterface;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Requests\AuthLoginRequest;
 use App\Http\Resources\UserResource;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Models\User;
 
 class AuthRepo extends AbstractRepo implements AuthRepoInterface
 {
@@ -61,7 +61,6 @@ class AuthRepo extends AbstractRepo implements AuthRepoInterface
         }
     }
 
-
     protected function createNewToken($token){
         return response()->json([
             'access_token' => $token,
@@ -91,7 +90,6 @@ class AuthRepo extends AbstractRepo implements AuthRepoInterface
 
     public function sendEmail($message,$email)
     {
-        // Send Email Code here ................
-        return true;
+           return true;
     }
 }

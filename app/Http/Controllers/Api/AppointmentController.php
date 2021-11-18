@@ -12,6 +12,7 @@ use App\Http\Resources\SearchResource;
 use App\Http\Resources\UserResource;
 use App\Models\Appointment;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File as FacadesFile;
@@ -26,6 +27,7 @@ class AppointmentController extends Controller
         $this->repo = $repo;
     }
 
+ 
     public function search(Request $request)
     {
         $data=User::where('name','like','%'.$request->teacher.'%')->where('type','teacher')->get();
@@ -69,10 +71,20 @@ class AppointmentController extends Controller
 
     public function store(AppointmentRequest $request)
     {
-        // try {
+        try {
             $times=Appointment::where('time',$request->time)->where('active',1)->where('user_id',auth()->id())->first();
             if($times){
-                return responseFail(__('Time not available'));
+                $day=date('Y-m-d');
+                $time_date=$times->created_at->format('Y-m-d');
+                $fdate = $time_date;
+                $tdate = $day;
+                $datetime1 = new DateTime($fdate);
+                $datetime2 = new DateTime($tdate);
+                $interval = $datetime1->diff($datetime2);
+                $days = $interval->format('%a');
+                if($days<31){
+                    return responseFail(__('Time not available'));
+                }
             }
             $input = [
                 'time' => $request->time,
@@ -84,9 +96,9 @@ class AppointmentController extends Controller
             } else {
                 return responseFail(__('app.some_thing_error'));
             }
-        // } catch (\Exception $e) {
-        //     return responseFail(__('app.some_thing_error'));
-        // }
+        } catch (\Exception $e) {
+            return responseFail(__('app.some_thing_error'));
+        }
     }
 
     public function update($id, AppointmentRequest $request)
