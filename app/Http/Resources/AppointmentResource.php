@@ -21,6 +21,7 @@ class AppointmentResource extends JsonResource
             'type' => $this->type,
             'teacher' => new UserResource($this->teacher()->first()),
             'category' => new CategoryResource($this->category()->first()),
+            'students' =>  $this->studentes,
             'active' => $this->active
         ];
     }

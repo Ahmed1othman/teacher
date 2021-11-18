@@ -18,7 +18,7 @@ class CreateAppointmentsTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained()->cascadeOnDelete();
             $table->enum('type',array('group','single'))->nullable();
-            $table->integer('time');
+            $table->string('time');
             $table->boolean('active')->default(true);
             $table->softDeletes();
             $table->timestamps();

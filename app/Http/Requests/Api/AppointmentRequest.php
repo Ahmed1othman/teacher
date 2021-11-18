@@ -33,14 +33,14 @@ class AppointmentRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'time' => 'required|integer|min:1|max:24',
+                    'time' => 'required|string',
                 ];
             }
             case 'PATCH':
             case 'PUT':
             {
                 return [
-                    'time' => 'required|integer|min:1|max:24',
+                    'time' => 'required|string',
                 ];
             }
             default:break;

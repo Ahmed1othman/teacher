@@ -18,6 +18,12 @@ class Appointment extends Model
     {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
+    public function studentes()
+    {
+        return $this->belongsToMany('App\Models\User', 'books', 'appointment_id', 'user_id');
+
+        return $this->hasMany('App\Models\User', 'user_id');
+    }
 
     public function category()
     {

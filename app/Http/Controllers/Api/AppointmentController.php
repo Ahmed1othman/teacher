@@ -9,7 +9,9 @@ use App\Http\Requests\Api\AppointmentRequest;
 use App\Http\Requests\BulkDeleteRequest;
 use App\Http\Resources\AppointmentResource;
 use App\Http\Resources\SearchResource;
+use App\Http\Resources\UserResource;
 use App\Models\Appointment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File as FacadesFile;
@@ -22,7 +24,14 @@ class AppointmentController extends Controller
     public function __construct(AppointmentRepo $repo)
     {
         $this->repo = $repo;
+    }
 
+    public function search(Request $request)
+    {
+        $data=User::where('name','like','%'.$request->teacher.'%')->where('type','teacher')->get();
+        return responseSuccess([
+            'data' =>  UserResource::collection($data),
+        ], __('app.data_returned_successfully'));
     }
 
     public function index(Request $request)
@@ -61,6 +70,10 @@ class AppointmentController extends Controller
     public function store(AppointmentRequest $request)
     {
         // try {
+            $times=Appointment::where('time',$request->time)->where('active',1)->where('user_id',auth()->id())->first();
+            if($times){
+                return responseFail(__('Time not available'));
+            }
             $input = [
                 'time' => $request->time,
                 'user_id' => auth()->id(),

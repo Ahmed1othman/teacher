@@ -66,6 +66,8 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
             Route::post('bulkRestore', [BookController::class, 'bulkRestore']);
         });
         Route::get('/notifications', [NotificationController::class, 'index']);
+        Route::post('search', [AppointmentController::class, 'search']);
+
     });
 
     Route::get('info', [InfoController::class,'index']);
