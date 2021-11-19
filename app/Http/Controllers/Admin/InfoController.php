@@ -38,7 +38,7 @@ class InfoController extends Controller
      *
      * @return Renderable
      */
-    
+
     public function index()
     {
         $data = $this->repo->getAll();
@@ -61,7 +61,7 @@ class InfoController extends Controller
         try{
             $input=$request->all();
             unset($input['_token']);
-
+            $data=null;
             foreach($input as $key=>$val){
                 $info=Info::where('option',$key)->first();
                 if(request()->hasFile($key)) {
@@ -75,9 +75,8 @@ class InfoController extends Controller
                 }else{
                     $item['value']=$val;
                 }
-                if($info){
-                    $data =$info? $this->repo->update($item, $info):$this->repo->create($item);
-                }
+                $data =$info? $this->repo->update($item, $info):$this->repo->create($item);
+
              }
 
             if ($data) {
