@@ -26,18 +26,11 @@ class AuthProfileRequest extends FormRequest
      */
     public function rules()
     {
-        // dd(auth()->id());
-
         return [
-            'first_name' => 'sometimes|string|max:255',
-            'last_name' => 'sometimes|string|max:255',
-            'coin_price' => 'sometimes|integer',
-            'bio' => 'sometimes|string',
+            'name' => 'sometimes|string|max:255',
             'phone' => 'sometimes|unique:users,phone,NULL,id,deleted_at,NULL' . auth()->id(),
             'email' => 'nullable|string|email|max:255|unique:users,email,NULL,id,deleted_at,NULL' . auth()->id(),
-            'country_id' => 'sometimes|exists:countries,id',
-            'city_id' => 'sometimes|exists:cities,id',
-            'type' => 'sometimes|in:customer,dealer',
+            'password' => 'nullable|min:8|confirmed',
 
         ];
     }

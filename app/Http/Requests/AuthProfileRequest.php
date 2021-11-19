@@ -28,12 +28,9 @@ class AuthProfileRequest extends FormRequest
     {
 
         return [
-                'first_name' => 'sometimes|string|max:255',
-                'last_name' => 'sometimes|string|max:255',
-                'phone' => 'sometimes|unique:users,phone,NULL,id,deleted_at,NULL' . auth()->id(),
+                'name' => 'sometimes|string|max:255',
+                 'phone' => 'sometimes|unique:users,phone,NULL,id,deleted_at,NULL' . auth()->id(),
                 'email' => 'nullable|string|email|max:255|unique:users,email,NULL,id,deleted_at,NULL' . auth()->id(),
-                'country_id' => 'nullable|exists:countries,id',
-                'city_id' => 'nullable|exists:cities,id',
                 'password' => 'nullable|min:8|confirmed',
         ];
     }
