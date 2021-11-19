@@ -17,8 +17,10 @@ class InfoSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->delete();
-        Category::create(['name' => 'رياض']);
-        Category::create(['name' => 'تمهيدى']);
+        Category::create(['name' => 'روضة وتمهيدى','photo'=>'163731927284979358.png']);
+        Category::create(['name' => 'التأسيس المكثف','photo'=>'1637319513260585112.png']);
+        Category::create(['name' => 'القراءة السريعة','photo'=>'1637319134625246815.png']);
+        Category::create(['name' => 'تميز','photo'=>'1637319638265411353.png']);
         DB::table('infos')->delete();
         Info::create(['option' => 'website_name_en','value' => 'Orjoha','type' => 'string']);
         Info::create(['option' => 'website_name_ar','value' => 'أرجوحة','type' => 'string']);
