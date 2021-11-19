@@ -4,7 +4,8 @@ namespace App\Http\Resources;
 use App\Http\Resources\CountryResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\PackageResource;
-
+use App\Models\Appointment;
+use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -29,6 +30,11 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        $appointments =Appointment::where('user_id',$this->id)->get();
+        $student_number=0;
+        foreach($appointments as $appointment){
+            $student_number+=Book::where('appointment_id',$appointment->id)->count();
+        }
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -38,7 +44,9 @@ class UserResource extends JsonResource
             'type' => $this->type,
             'image' => $this->photo,
             'bio' => $this->bio,
+            'student_number' => $student_number,
             'category' => new CategoryResource($this->category()->first()),
+
             'active' => $this->active,
             'create_dates' => [
                 'created_at_human' => $this->created_at->diffForHumans(),

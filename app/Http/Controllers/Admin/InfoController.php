@@ -38,6 +38,7 @@ class InfoController extends Controller
      *
      * @return Renderable
      */
+    
     public function index()
     {
         $data = $this->repo->getAll();

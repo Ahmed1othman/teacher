@@ -43,6 +43,16 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo('App\Models\Category', 'category_id');
     }
 
+    public function student_number($id)
+    {
+        $appointments =Appointment::where('user_id',$this->attributes['id'])->get();
+        $total=0;
+        foreach($appointments as $appointment){
+            $total+=Book::where('appointment_id',$appointment->id)->count();
+        }
+        return $total;
+    }
+
 
 
     public function getPhotoAttribute()
