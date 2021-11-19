@@ -216,14 +216,16 @@ function changeProjectStatus(id, status) {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: app_url + "/project-status/" + id,
+        url: app_url + "/appointment-status/" + id,
         type: 'POST',
         data: { status: status, _token: $('meta[name="csrf-token"]').attr('content') },
         async: false,
         success: function(data) {
             var obj = JSON.parse(data);
+            $("#status_" + id).replaceWith('<span id="status_"' +
+                id + '>' +
+                status + '</span>')
             showNotification('top', 'center', "primary", 'Success', obj.msg);
-            $("#row_" + id).fadeOut(1500)
         },
         error: function(request, status, error) {
             showNotification('top', 'center', "danger", 'Something Went wrong');

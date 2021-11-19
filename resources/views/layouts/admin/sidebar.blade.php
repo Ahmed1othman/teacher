@@ -13,6 +13,11 @@
                          <i class="simple-icon-user-following"></i> <span class="d-inline-block">{{ __('admin/app.users') }}</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('appointment.index') }}">
+                         <i class="simple-icon-user-following"></i> <span class="d-inline-block">{{ __('admin/app.appointments') }}</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="#generalSetting">

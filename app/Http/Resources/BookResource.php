@@ -19,6 +19,7 @@ class BookResource extends JsonResource
             'id' => $this->id,
             'appointment' => new AppointmentResource($this->appointment()->first()),
             'student' => new UserResource($this->student()->first()),
+            'status' => $this->status,
             'active' => $this->active
         ];
     }

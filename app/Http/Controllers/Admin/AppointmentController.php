@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\Eloquent\ProjectRepo;
-use App\Http\Requests\Admin\ProjectRequest ;
-use App\Models\Project;
+use App\Http\Repositories\Eloquent\BookRepo;
+use App\Http\Requests\Admin\AppointmentRequest ;
+use App\Models\Appointment;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\File as FacadesFile;
 
-class ProjectController extends Controller
+class AppointmentController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -29,10 +29,10 @@ class ProjectController extends Controller
 
 
 
-    public function __construct(ProjectRepo $repo)
+    public function __construct(BookRepo $repo)
     {
        $this->repo = $repo;
-       $this->modelName = 'projects';
+       $this->modelName = 'appointments';
        $this->namespaceName = 'admin';
 
     }
@@ -53,35 +53,35 @@ class ProjectController extends Controller
 
     }
 
-    public function projectsRequest ()
+    public function AppointmentsRequest ()
     {
 
         $data=$this->repo->findWhere('status','pending');
-        $title='projects_request';
+        $title='Appointments_request';
 
         return view($this->namespaceName.'.'.$this->modelName.'.requests', compact('data','title'));
     }
 
-    public function implementationProject ()
+    public function implementationAppointment ()
     {
         $data=$this->repo->findWhere('status','implementation');
 
-        $title='projects_implementation';
+        $title='Appointments_implementation';
 
         return view($this->namespaceName.'.'.$this->modelName.'.implementation', compact('data','title'));
     }
 
-    public function deliveryProject ()
+    public function deliveryAppointment ()
     {
         $data=$this->repo->findWhere('status','delivery');
-        $title='projects_delivery';
+        $title='Appointments_delivery';
         return view($this->namespaceName.'.'.$this->modelName.'.delivery', compact('data','title'));
     }
 
-    public function historyProject ()
+    public function historyAppointment ()
     {
-        $data=Project::whereIn('status',['canceld','rejected','completed'])->get();
-        $title='projects_history';
+        $data=Appointment::whereIn('status',['canceld','rejected','completed'])->get();
+        $title='Appointments_history';
         return view($this->namespaceName.'.'.$this->modelName.'.history', compact('data','title'));
     }
 
@@ -91,26 +91,10 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function store(ProjectRequest $request)
+    public function store(AppointmentRequest $request)
     {
 
-      try {
-            $data=$request->all();
 
-            foreach($data as $key=>$val){
-                $file=request()->file($key);
-                if($file){
-                    $data[$key]=$this->repo->storeFile($file,$this->modelName);
-                }
-            }
-            $this->repo->create($data);
-            session()->flash('Add', __('admin/app.success_message'));
-            return redirect($this->modelName);
-
-        } catch (\Exception $e) {
-            DB::rollback();
-            return redirect()->back()->with('error',__('app.some_thing_error'));
-        }
     }
 
     /**
@@ -130,28 +114,10 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function update(ProjectRequest $request,$id)
+    public function update(AppointmentRequest $request,$id)
     {
 
-        try {
-            $data=$request->all();
-            $item=$this->repo->findOrFail($request->id);
 
-            foreach($data as $key=>$val){
-                $file=request()->file($key);
-                if($file){
-                    FacadesFile::delete('public/'.$this->modelName.'/' . $item->photo);
-                    $data[$key]=$this->repo->storeFile($file,$this->modelName);
-                }
-            }
-            $this->repo->update($data,$item);
-            session()->flash('Edit', __('admin/app.success_message'));
-            return redirect($this->modelName);
-        } catch (\Exception $e) {
-            DB::rollback();
-            return redirect()->back()
-                ->with('error',__('app.some_thing_error'));
-        }
     }
 
     public function changeStatus(Request $request)
@@ -175,7 +141,7 @@ class ProjectController extends Controller
     }
     public function adminChangeStatus($id,Request $request)
     {
-        try{
+        // try{
             $item=$this->repo->findOrFail($id);
             $data['status']=$request->status;
 
@@ -188,34 +154,13 @@ class ProjectController extends Controller
             }
             return json_encode($response);
 
-       } catch (\Exception $e) {
-           DB::rollback();
-           $response = ['code' => 0, 'msg' => __('admin/app.some_thing_error')];
-           return json_encode($response);
-       }
+    //    } catch (\Exception $e) {
+    //        DB::rollback();
+    //        $response = ['code' => 0, 'msg' => __('admin/app.some_thing_error')];
+    //        return json_encode($response);
+    //    }
     }
-    public function rejectProject($id)
-    {
-        try{
-            $item=$this->repo->findOrFail($id);
-            $data['status']='rejected';
-            $data['active']=false;
 
-            $data= $this->repo->changeStatus($data,$item);
-            if ($data) {
-                $response = ['code' => 1, 'msg' => __('admin/app.success_message')];
-
-            } else {
-                $response = ['code' => 0, 'msg' => __('admin/app.some_thing_error')];
-            }
-            return json_encode($response);
-
-       } catch (\Exception $e) {
-           DB::rollback();
-           $response = ['code' => 0, 'msg' => __('admin/app.some_thing_error')];
-           return json_encode($response);
-       }
-    }
 
     /**
      * Delete more than one permission.

@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\AppointmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NotificationsController;
 
@@ -53,18 +53,18 @@ Route::group(['middleware'=>['auth','language']],function (){
     Route::resource('categories', CategoryController::class);
     Route::post('categories-active', [CategoryController::class,'changeStatus']);
 
-    Route::resource('projects', ProjectController::class);
-    Route::get('projects-request', [ProjectController::class,'projectsRequest'])->name('projects.request');
-    Route::get('projects-implementation', [ProjectController::class,'implementationProject'])->name('projects.implementation');
-    Route::get('projects-delivery', [ProjectController::class,'deliveryProject'])->name('projects.delivery');
-    Route::get('projects-history', [ProjectController::class,'historyProject'])->name('projects.history');
-    Route::post('projects-active', [ProjectController::class,'changeStatus']);
-    Route::post('accept-project/{id}', [ProjectController::class,'acceptProject']);
-    Route::post('project-status/{id}', [ProjectController::class,'adminChangeStatus']);
-    Route::post('reject-project/{id}', [ProjectController::class,'rejectProject']);
+    Route::resource('appointment', AppointmentController::class);
+    Route::get('appointment-request', [AppointmentController::class,'appointmentRequest'])->name('appointment.request');
+    Route::get('appointment-implementation', [AppointmentController::class,'implementationAppointment'])->name('appointment.implementation');
+    Route::get('appointment-delivery', [AppointmentController::class,'deliveryAppointment'])->name('appointment.delivery');
+    Route::get('appointment-history', [AppointmentController::class,'historyAppointment'])->name('appointment.history');
+    Route::post('appointments-active', [AppointmentController::class,'changeStatus']);
+    Route::post('accept-appointment/{id}', [AppointmentController::class,'acceptAppointment']);
+    Route::post('appointment-status/{id}', [AppointmentController::class,'adminChangeStatus']);
+    Route::post('reject-appointment/{id}', [AppointmentController::class,'rejectAppointment']);
 
     Route::resource('info', InfoController::class);
-    Route::get('notify/{id}/{status}', [ProjectController::class,'markAsRead'])->name('projectNotification');
+    Route::get('notify/{id}/{status}', [AppointmentController::class,'markAsRead'])->name('appointmentNotification');
 
     Route::resource('notifications', NotificationsController::class);
 

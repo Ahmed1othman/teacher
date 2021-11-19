@@ -64,6 +64,7 @@ class BookController extends Controller
     {
         // try {
             $input = [
+                'status' => 'pending',
                 'appointment_id' => $request->appointment_id,
                 'user_id' => auth()->id(),
             ];
