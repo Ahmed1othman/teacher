@@ -43,10 +43,10 @@ class UserResource extends JsonResource
             'rate' => $this->rate,
             'type' => $this->type,
             'image' => $this->photo,
+            'price' => $this->price,
             'bio' => $this->bio,
             'student_number' => $student_number,
             'category' => new CategoryResource($this->category()->first()),
-
             'active' => $this->active,
             'create_dates' => [
                 'created_at_human' => $this->created_at->diffForHumans(),

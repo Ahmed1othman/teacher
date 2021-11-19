@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Repositories\Eloquent;
-
 use App\Http\Repositories\Interfaces\AuthRepoInterface;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -11,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
-
 class AuthRepo extends AbstractRepo implements AuthRepoInterface
 {
     use AuthenticatesUsers;
