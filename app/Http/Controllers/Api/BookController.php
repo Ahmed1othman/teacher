@@ -62,7 +62,7 @@ class BookController extends Controller
 
     public function store(BookRequest $request)
     {
-        // try {
+        try {
             $input = [
                 'status' => 'pending',
                 'appointment_id' => $request->appointment_id,
@@ -81,7 +81,8 @@ class BookController extends Controller
                     }elseif($books==0){
                         if($request->type){
                             if($request->type=='single'||$request->type=='group'){
-                                $appointment->category_id=auth()->user()->category_id;
+                                $appointment->category_id=$request->category_id;
+
                                 $appointment->type=$request->type;
                             }else{
                                     return responseFail('Type Invalied should be in single or group');
@@ -89,7 +90,9 @@ class BookController extends Controller
                             }else{
                                 return responseFail('Type required');
                         }
-                        $appointment->category_id=auth()->user()->category_id;
+
+                        $appointment->category_id=$request->category_id;
+
                         $appointment->type=$request->type;
                     }
                 }
@@ -102,9 +105,9 @@ class BookController extends Controller
             } else {
                 return responseFail(__('app.some_thing_error'));
             }
-        // } catch (\Exception $e) {
-        //     return responseFail(__('app.some_thing_error'));
-        // }
+        } catch (\Exception $e) {
+            return responseFail(__('app.some_thing_error'));
+        }
     }
 
     public function update($id, BookRequest $request)
@@ -128,9 +131,10 @@ class BookController extends Controller
                         return responseFail(__('admin/app.this_appointment_compleated'));
                     }elseif($books==0){
                         $request->validate([
-                            'type' => ['required', 'in:single,group']
+                            'type' => ['required', 'in:single,group'],
+                            'category_id' => ['required', 'exists:categories,id']
                         ]);
-                        $appointment->category_id=auth()->user()->category_id;
+                        $appointment->category_id=$request->category_id;
                         $appointment->type=$request->type;
                     }
                 }

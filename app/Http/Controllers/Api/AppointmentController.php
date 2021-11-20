@@ -27,7 +27,6 @@ class AppointmentController extends Controller
         $this->repo = $repo;
     }
 
- 
     public function search(Request $request)
     {
         $data=User::where('name','like','%'.$request->teacher.'%')->where('type','teacher')->get();
@@ -149,6 +148,5 @@ class AppointmentController extends Controller
             return responseFail(__('app.some_thing_error'));
         }
     }
-
 
 }

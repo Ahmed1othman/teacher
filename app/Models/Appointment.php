@@ -20,8 +20,14 @@ class Appointment extends Model
     }
     public function studentes()
     {
-        return $this->belongsToMany('App\Models\User', 'books', 'appointment_id', 'user_id');
-
+        return $this->belongsToMany('App\Models\User', 'books', 'appointment_id', 'user_id','id');
+        // $related,
+        // $table = null,
+        // $foreignPivotKey = null,
+        // $relatedPivotKey = null,
+        // $parentKey = null,
+        // $relatedKey = null,
+        // $relation = null
         return $this->hasMany('App\Models\User', 'user_id');
     }
 

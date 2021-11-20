@@ -37,7 +37,6 @@ class RateController extends Controller
 
         }
         $data = $this->repo->Paginate($input, $wheres);
-
         return responseSuccess([
             'data' => $input["resource"] == "all" ? RateResource::collection($data) : SearchResource::collection($data),
             'meta' => [
@@ -59,7 +58,6 @@ class RateController extends Controller
 
     public function store(RateRequest $request)
     {
-
         try {
             $input = [
                 'value' => $request->value,
@@ -67,50 +65,42 @@ class RateController extends Controller
                 'user_id' => auth()->id(),
                 'rateable_id' => $request->id,
             ];
-
             $input['rateable_type'] = 'App\Models\User';
-
-
             $fileUpload = request()->file('photo');
             if ($fileUpload) {
                 $input['photo'] = $this->repo->storeFile($fileUpload, 'rates');
             }
             $data = $this->repo->create($input);
-
             $product = $input['rateable_type']::findorFail($data->rateable_id);
             if ($product) {
                 $all_product_rates = 0;
                 foreach ($product->rateable as $rate) {
                     $all_product_rates += $rate->value;
                 }
-
                 $product->rate = $all_product_rates / count($product->rateable);
                 $product->save();
             }
-
             if ($data) {
                 return responseSuccess(new RateResource($data));
             } else {
                 return responseFail(__('app.some_thing_error'));
             }
-
         } catch (\Exception $e) {
             return responseFail(__('app.some_thing_error'));
         }
-
     }
 
     public function userRate($id)
     {
        $data= RateResource::collection(Rate::where('rateable_type','App\Models\User')->where('rateable_id',$id)->get());
-       return responseSuccess([
-        'data' => RateResource::collection($data),
-        'meta' => [
-            'total' => $data->count(),
-            'currentPage' => 1,
-            'lastPage' => 1,
-        ],
-    ], __('app.data_returned_successfully'));
+        return responseSuccess([
+            'data' => RateResource::collection($data),
+            'meta' => [
+                'total' => $data->count(),
+                'currentPage' => 1,
+                'lastPage' => 1,
+            ],
+       ], __('app.data_returned_successfully'));
     }
 
     public function update($id, RateRequest $request)
@@ -172,6 +162,5 @@ class RateController extends Controller
             return responseFail(__('app.some_thing_error'));
         }
     }
-
 
 }

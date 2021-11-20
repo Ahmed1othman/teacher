@@ -7,12 +7,18 @@ use App\Http\Repositories\Eloquent\LectureRepo;
 use App\Http\Requests\Api\LectureRequest;
 use App\Http\Requests\BulkDeleteRequest;
 use App\Http\Resources\LectureResource;
+use App\Http\Resources\AppointmentResource;
+use App\Http\Resources\BookResource;
 use App\Http\Resources\SearchResource;
+use App\Http\Resources\UserResource;
 use App\Models\Lecture;
+use App\Models\Book;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File as FacadesFile;
 use Illuminate\Support\Facades\Schema;
+use stdClass;
 
 class LectureController extends Controller
 {
@@ -54,6 +60,28 @@ class LectureController extends Controller
 
         return responseSuccess([
             'data' => new LectureResource($data),
+        ], __('app.data_returned_successfully'));
+    }
+
+    public function teachersLesson($id)
+    {
+        $data=[];
+        $appointments=Appointment::where('user_id',$id)->get();
+        foreach($appointments as $appointment){
+            $obj = new stdClass();
+            $students=[];
+            $books = Book::where('appointment_id',$appointment->id)->get();
+            foreach($books as $book){
+                $students[]=new UserResource($book->student()->first());
+            }
+            $obj->sturdent=$students;
+            $obj->time=$appointment->time;
+            $obj->type=$appointment->type;
+            $obj->category=$appointment->category;
+            $data[] =$obj;
+        }
+        return responseSuccess([
+            'data' =>$data,
         ], __('app.data_returned_successfully'));
     }
 

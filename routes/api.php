@@ -22,6 +22,7 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
         Route::post('checkcode', [AuthController::class,'checkcode']);
         Route::post('reset', [AuthController::class,'reset']);
     });
+
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::post('profileImage/{user}', [AuthController::class,'profileImage']);
         Route::get('logout', [AuthController::class,'logout']);
@@ -31,6 +32,7 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
         Route::post('profile', [AuthController::class,'profile']);
         Route::put('changePassword', [AuthController::class,'changePassword']);
 
+        Route::get('teachers-lesson/{id}', [LectureController::class,'teachersLesson']);
         Route::group([ 'prefix' => 'lectures'], function () {
             Route::get('/', [LectureController::class,'index']);
             Route::post('/', [LectureController::class,'store']);
@@ -58,6 +60,7 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
             Route::delete('bulkDelete', [AppointmentController::class, 'bulkDelete']);
             Route::post('bulkRestore', [AppointmentController::class, 'bulkRestore']);
         });
+
         Route::group(['prefix' => 'books'], function () {
             Route::get('/', [BookController::class, 'index']);
             Route::post('/', [BookController::class, 'store']);
@@ -66,14 +69,18 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
             Route::delete('bulkDelete', [BookController::class, 'bulkDelete']);
             Route::post('bulkRestore', [BookController::class, 'bulkRestore']);
         });
+
         Route::get('/notifications', [NotificationController::class, 'index']);
         Route::post('search', [AppointmentController::class, 'search']);
 
     });
 
     Route::get('info', [InfoController::class,'index']);
+
     Route::get('categories', [InfoController::class,'categories']);
+
     Route::post('contacts', [ContactController::class,'store']);
+
     Route::group(['middleware' => [], 'namespace' => 'LookUp'], function () {
         Route::group([ 'prefix' => 'country'], function () {
             Route::get('/', [CountryController::class,'index']);
@@ -88,5 +95,6 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
             Route::get('/', [PartnerController::class,'index']);
         });
     });
+
 });
 
