@@ -21,6 +21,8 @@
                         <thead>
                             <tr>
                                 <th>{{ __('admin/app.name') }}</th>
+                                <th>{{ __('admin/app.single_price') }}</th>
+                                <th>{{ __('admin/app.group_price') }}</th>
                                 <th>{{ __('admin/app.photo') }}</th>
                                 <th>{{ __('admin/app.active') }}</th>
                                 <th>{{ __('admin/app.action') }}</th>
@@ -30,6 +32,8 @@
                             @foreach ($data as $row)
                             <tr id="row_{{ $row->id }}">
                                 <td> {{ $row->name }}  </td>
+                                <td> {{ $row->single_price }}  </td>
+                                <td> {{ $row->group_price }}  </td>
                                 <td>
                                     <div class="row social-image-row gallery">
                                         <a href="{{ $row->image }}">
@@ -89,6 +93,22 @@
                                                             <div class="form-group has-float-label">
                                                                 <input class="form-control @error('name') is-invalid @enderror" placeholder="{{ __('admin/app.name') }}" name="name" value="{{ old('name')?old('name'):$row->name }}" required  />
                                                                 @error('name')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group has-float-label">
+                                                                <input class="form-control @error('single_price') is-invalid @enderror" placeholder="{{ __('admin/app.single_price') }}" name="single_price" value="{{ old('single_price')?old('single_price'):$row->single_price }}" required  />
+                                                                @error('single_price')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group has-float-label">
+                                                                <input class="form-control @error('group_price') is-invalid @enderror" placeholder="{{ __('admin/app.group_price') }}" name="group_price" value="{{ old('group_price')?old('group_price'):$row->group_price }}" required  />
+                                                                @error('group_price')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
@@ -155,6 +175,22 @@
                         <div class="form-group has-float-label">
                             <input class="form-control @error('name') is-invalid @enderror" placeholder="{{ __('admin/app.name') }}" name="name" value="{{ old('name') }}" required />
                             @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group has-float-label">
+                            <input class="form-control @error('single_price') is-invalid @enderror" placeholder="{{ __('admin/app.single_price') }}" name="single_price" value="{{ old('single_price') }}" required />
+                            @error('single_price')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group has-float-label">
+                            <input class="form-control @error('group_price') is-invalid @enderror" placeholder="{{ __('admin/app.group_price') }}" name="group_price" value="{{ old('group_price') }}" required />
+                            @error('group_price')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

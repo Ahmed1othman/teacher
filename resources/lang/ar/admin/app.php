@@ -182,6 +182,8 @@ return [
     'students' => 'طلاب',
     'student' => 'طالب',
     'accept' => 'قبول',
+    'single_price' => 'السعر الفردى',
+    'group_price' => 'السعر الجماعى',
     'reject' => 'رفض',
     'teacher' => 'معلم',
     'teachers' => 'مدرسون',

@@ -182,8 +182,6 @@ function deleteModel(id, url) {
         error: function(request, status, error) {
             showNotification('top', 'center', "danger", 'Something Went wrong');
             $(".delete_Modal_" + id).modal('hide')
-
-
         }
     });
 
@@ -211,7 +209,6 @@ function acceptProject(id) {
 }
 
 function changeProjectStatus(id, status) {
-
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -231,7 +228,6 @@ function changeProjectStatus(id, status) {
             showNotification('top', 'center', "danger", 'Something Went wrong');
         }
     });
-
 }
 
 function rejectProject(id) {

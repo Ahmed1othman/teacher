@@ -30,6 +30,8 @@ class CategoryRequest extends FormRequest
             {
                 return [
                     'name' => 'required|string|min:2|unique:categories,name,NULL,id,deleted_at,NULL',
+                    'single_price' =>'required',
+                    'group_price' =>'required',
                     'photo'=>'required|image|mimes:jpeg,bmp,png|max:4096'
                 ];
             }
@@ -38,6 +40,8 @@ class CategoryRequest extends FormRequest
             {
                 return [
                     'name' => 'required|string|min:2',
+                    'single_price' =>'required',
+                    'group_price' =>'required',
                     'photo'=>'image|mimes:jpeg,bmp,png|max:4096|nullable'
                 ];
             }
