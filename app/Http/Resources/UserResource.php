@@ -47,7 +47,6 @@ class UserResource extends JsonResource
             'price' => $this->price,
             'bio' => $this->bio,
             'student_number' => $student_number,
-            'category' => new CategoryResource($this->category()->first()),
             'categories' => $this->categories,
             'active' => $this->active,
             'create_dates' => [
