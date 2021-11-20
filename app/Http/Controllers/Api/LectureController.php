@@ -70,7 +70,7 @@ class LectureController extends Controller
         foreach($appointments as $appointment){
             $obj = new stdClass();
             $students=[];
-            $books = Book::where('appointment_id',$appointment->id)->where('status','accepted')->get();
+            $books = Book::where('appointment_id',$appointment->id)->get();
             foreach($books as $book){
                 $students[]=new UserResource($book->student()->first());
             }
