@@ -16,7 +16,7 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->foreignId('appointment_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('a')->constrained()->cascadeOnDelete();
             $table->boolean('active')->default(true);
             $table->softDeletes();
             $table->timestamps();

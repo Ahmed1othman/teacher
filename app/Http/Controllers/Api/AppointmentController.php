@@ -67,6 +67,14 @@ class AppointmentController extends Controller
             'data' => new AppointmentResource($data),
         ], __('app.data_returned_successfully'));
     }
+    public function getteacher($id)
+    {
+
+        $data = Appointment::where('user_id',$id)->get();
+        return responseSuccess([
+            'data' =>  AppointmentResource::collection($data),
+        ], __('app.data_returned_successfully'));
+    }
 
     public function store(AppointmentRequest $request)
     {

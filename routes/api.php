@@ -52,6 +52,7 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
             Route::post('bulkRestore', [RateController::class, 'bulkRestore']);
         });
 
+        Route::get('teacher-appointment/{id}', [AppointmentController::class, 'getteacher']);
         Route::group(['prefix' => 'appointments'], function () {
             Route::get('/', [AppointmentController::class, 'index']);
             Route::post('/', [AppointmentController::class, 'store']);
