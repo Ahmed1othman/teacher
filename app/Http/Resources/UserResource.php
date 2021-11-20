@@ -35,6 +35,7 @@ class UserResource extends JsonResource
         foreach($appointments as $appointment){
             $student_number+=Book::where('appointment_id',$appointment->id)->count();
         }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -47,6 +48,7 @@ class UserResource extends JsonResource
             'bio' => $this->bio,
             'student_number' => $student_number,
             'category' => new CategoryResource($this->category()->first()),
+            'categories' => $this->categories,
             'active' => $this->active,
             'create_dates' => [
                 'created_at_human' => $this->created_at->diffForHumans(),
