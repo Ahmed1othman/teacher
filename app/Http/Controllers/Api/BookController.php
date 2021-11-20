@@ -94,6 +94,11 @@ class BookController extends Controller
                         $appointment->category_id=$request->category_id;
 
                         $appointment->type=$request->type;
+                    }elseif(count($books)>1 && count($books)<5){
+                        if($appointment->category_id!=$request->category_id){
+                            return responseFail(__('this appointment bokked on other category'));
+                        }
+
                     }
                 }
                 $data = $this->repo->create($input);
