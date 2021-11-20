@@ -4,19 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Eloquent\AppointmentRepo;
-use App\Http\Requests\Api\BookRequest;
 use App\Http\Requests\Api\AppointmentRequest;
 use App\Http\Requests\BulkDeleteRequest;
 use App\Http\Resources\AppointmentResource;
+use Illuminate\Support\Facades\Schema;
 use App\Http\Resources\SearchResource;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Models\Appointment;
 use App\Models\User;
 use DateTime;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File as FacadesFile;
-use Illuminate\Support\Facades\Schema;
 
 class AppointmentController extends Controller
 {
@@ -29,9 +27,15 @@ class AppointmentController extends Controller
 
     public function search(Request $request)
     {
-        $data=User::where('name','like','%'.$request->teacher.'%')->where('type','teacher')->get();
+        $data=[];
+        $users=User::where('name','like','%'.$request->teacher.'%')->where('type','teacher')->get();
+        foreach($users as $user){
+            foreach($user->categories as $row){
+                $data[]=new UserResource($user);
+            }
+        }
         return responseSuccess([
-            'data' =>  UserResource::collection($data),
+            'data' =>  $data,
         ], __('app.data_returned_successfully'));
     }
 
@@ -67,6 +71,7 @@ class AppointmentController extends Controller
             'data' => new AppointmentResource($data),
         ], __('app.data_returned_successfully'));
     }
+
     public function getteacher($id)
     {
 

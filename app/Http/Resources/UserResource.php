@@ -32,6 +32,7 @@ class UserResource extends JsonResource
     {
         $appointments =Appointment::where('user_id',$this->id)->get();
         $student_number=0;
+        
         foreach($appointments as $appointment){
             $student_number+=Book::where('appointment_id',$appointment->id)->count();
         }
