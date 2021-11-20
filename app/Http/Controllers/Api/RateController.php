@@ -102,6 +102,28 @@ class RateController extends Controller
             ],
        ], __('app.data_returned_successfully'));
     }
+    public function userRateCount($id)
+    {
+       $data= Rate::where('rateable_type','App\Models\User')->where('rateable_id',$id)->count();
+       $data1= Rate::where('rateable_type','App\Models\User')->where('rateable_id',$id)->where('value',1)->count();
+       $data2= Rate::where('rateable_type','App\Models\User')->where('rateable_id',$id)->where('value',2)->count();
+       $data3= Rate::where('rateable_type','App\Models\User')->where('rateable_id',$id)->where('value',3)->count();
+       $data4= Rate::where('rateable_type','App\Models\User')->where('rateable_id',$id)->where('value',4)->count();
+       $data5= Rate::where('rateable_type','App\Models\User')->where('rateable_id',$id)->where('value',5)->count();
+       if($data==0){
+           $data=1;
+       }
+        return responseSuccess([
+            'data' => [
+                        'total'=>$data,
+                        'value_1'=>$data1/$data*100,
+                        'value_2'=>$data2/$data*100,
+                        'value_3'=>$data3/$data*100,
+                        'value_4'=>$data4/$data*100,
+                        'value_5'=>$data5/$data*100
+                      ],
+       ], __('app.data_returned_successfully'));
+    }
 
     public function update($id, RateRequest $request)
     {

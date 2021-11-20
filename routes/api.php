@@ -33,6 +33,8 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
         Route::put('changePassword', [AuthController::class,'changePassword']);
 
         Route::get('teachers-lesson/{id}', [LectureController::class,'teachersLesson']);
+    
+        Route::get('students-lesson/{id}', [LectureController::class,'studentsLesson']);
         Route::group([ 'prefix' => 'lectures'], function () {
             Route::get('/', [LectureController::class,'index']);
             Route::post('/', [LectureController::class,'store']);
@@ -45,6 +47,7 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
         Route::group(['prefix' => 'rate'], function () {
             Route::get('/', [RateController::class, 'index']);
             Route::get('/user-rate/{id}', [RateController::class, 'userRate']);
+            Route::get('/user-rate-count/{id}', [RateController::class, 'userRateCount']);
             Route::post('/', [RateController::class, 'store']);
             Route::get('{rate}', [RateController::class, 'get']);
             Route::put('{rate}', [RateController::class, 'update']);
