@@ -89,27 +89,9 @@ class LectureController extends Controller
 
     public function studentsLesson($id)
     {
-        $data=[];
-        $appointments=Book::select(DB::raw('appointment_id'))
-        ->groupBy('appointment_id')
-        ->having('user_id',$id)
-        ->get();
-        dd($appointments);
-        foreach($appointments as $appointment){
-            $obj = new stdClass();
-            $students=[];
-            $books = Book::where('appointment_id',$appointment->id)->where('status','accepted')->get();
-            foreach($books as $book){
-                $students[]=new UserResource($book->student()->first());
-            }
-            $obj->sturdent=$students;
-            $obj->time=$appointment->time;
-            $obj->type=$appointment->type;
-            $obj->category=$appointment->category;
-            $data[] =$obj;
-        }
+        $data=Book::where('user_id',$id)->get(); 
         return responseSuccess([
-            'data' =>$data,
+            'data' =>BookResource::collection($data),
         ], __('app.data_returned_successfully'));
     }
 
