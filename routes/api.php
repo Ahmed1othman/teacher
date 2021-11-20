@@ -42,6 +42,7 @@ Route::group(['middleware' => ['api','lang'],'namespace' => 'Api'], function () 
 
         Route::group(['prefix' => 'rate'], function () {
             Route::get('/', [RateController::class, 'index']);
+            Route::get('/user-rate/{id}', [RateController::class, 'userRate']);
             Route::post('/', [RateController::class, 'store']);
             Route::get('{rate}', [RateController::class, 'get']);
             Route::put('{rate}', [RateController::class, 'update']);

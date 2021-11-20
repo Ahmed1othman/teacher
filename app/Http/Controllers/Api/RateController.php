@@ -100,6 +100,19 @@ class RateController extends Controller
 
     }
 
+    public function userRate($id)
+    {
+       $data= RateResource::collection(Rate::where('rateable_type','App\Models\User')->where('rateable_id',$id)->get());
+       return responseSuccess([
+        'data' => RateResource::collection($data),
+        'meta' => [
+            'total' => $data->count(),
+            'currentPage' => 1,
+            'lastPage' => 1,
+        ],
+    ], __('app.data_returned_successfully'));
+    }
+
     public function update($id, RateRequest $request)
     {
         $item = $this->repo->findOrFail($id);
