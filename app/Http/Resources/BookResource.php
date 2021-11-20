@@ -18,7 +18,7 @@ class BookResource extends JsonResource
         return [
             'id' => $this->id,
             'appointment' => new AppointmentResource($this->appointment()->first()),
-            'students' =>  UserResource::collection($this->students),
+            // 'students' =>  UserResource::collection($this->students),
             'status' => $this->status,
             'active' => $this->active
         ];

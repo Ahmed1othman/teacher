@@ -69,22 +69,22 @@ class LectureController extends Controller
         $appointments=Appointment::where('user_id',$id)->get();
         foreach($appointments as $appointment){
             $obj = new stdClass();
-            $students=[];
             $books = Book::where('appointment_id',$appointment->id)->get();
-            foreach($books as $book){
-                $students[]=new UserResource($book->student()->first());
-            }
-            if(count($students)){
-                $obj->sturdent=$students;
+            // foreach($books as $book){
+            //     $students[]=new UserResource($book->student()->first());
+            //     $students[]['status']=$book->status;
+            // }
+            if(count($books)){
+                $obj->data=BookResource::collection($books);
                 $obj->time=$appointment->time;
                 $obj->type=$appointment->type;
                 $obj->category=$appointment->category;
                 $data[] =$obj;
             }
         }
-        return responseSuccess([
-            'data' =>$data,
-        ], __('app.data_returned_successfully'));
+        return responseSuccess(
+            $data
+        , __('app.data_returned_successfully'));
     }
 
     public function studentsLesson($id)
