@@ -72,7 +72,7 @@ class AppointmentController extends Controller
 
         $data = Appointment::where('user_id',$id)->get();
         return responseSuccess([
-            'data' =>  AppointmentResource::collection($data),
+            'data' =>  $data,
         ], __('app.data_returned_successfully'));
     }
 

@@ -74,11 +74,13 @@ class LectureController extends Controller
             foreach($books as $book){
                 $students[]=new UserResource($book->student()->first());
             }
-            $obj->sturdent=$students;
-            $obj->time=$appointment->time;
-            $obj->type=$appointment->type;
-            $obj->category=$appointment->category;
-            $data[] =$obj;
+            if(count($students)){
+                $obj->sturdent=$students;
+                $obj->time=$appointment->time;
+                $obj->type=$appointment->type;
+                $obj->category=$appointment->category;
+                $data[] =$obj;
+            }
         }
         return responseSuccess([
             'data' =>$data,
